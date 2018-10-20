@@ -17,22 +17,43 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var mBtnSend: UIButton!
     @IBOutlet weak var mChatList: UICollectionView!
     
-    private var mPresenter: ChatPresenter!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mPresenter = ChatPresenter(root: self)
+    var presenter: IChatPresenter? {
+        didSet {
+            self.bind()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mPresenter.registerNotification()
+        presenter?.registerNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        mPresenter.unregisterNotification()
+        presenter?.unregisterNotification()
     }
+    
+    func bind() {
+        mChatList.dataSource = presenter
+        mChatList.delegate = presenter
+        mTextChat.delegate = presenter
+    }
+    
+    // MARK: Users Actions
+    
+    @IBAction func btnSend_Click(_ sender: Any) {
+        presenter?.send(msg: mTextChat.text)
+        clearTextBox()
+    }
+    
+    @IBAction func chatList_Tap(_ sender: UITapGestureRecognizer) {
+        if mTextChat.isFirstResponder {
+            mTextChat.resignFirstResponder()
+        }
+    }
+}
+
+extension ChatViewController: IChatController {
     
     func notifyDataChanged() {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
@@ -40,17 +61,33 @@ class ChatViewController: UIViewController {
         perform(#selector(scrollToBottom), with: nil, afterDelay: 0.2)
     }
     
-    func renderChatBox(text: String) {
-        mTextBounds.text = text
-        let available = text.count > 0
+    func updateChatBox(text str: String) {
+        mTextBounds.text = str
+        let available = str.count > 0
         mBtnSend.isEnabled = available
         mTextPlaceHolder.isHidden = available
         mBtnSend.tintColor = UIColor.init(argb: available ? 0xFF1273EB : 0xFFC1C1C1)
     }
     
+    func updateChatBox(bottom constant: CGFloat) {
+        mChatBoxBottom.constant = constant
+    }
+    
+    func lockAtBottom(offset y: CGFloat) {
+        mChatList.contentOffset.y = mChatList.contentSize.height - mChatList.frame.height - y
+    }
+    
+    func animationChatBox(duration: TimeInterval) {
+        let offset = mChatList.contentSize.height - mChatList.contentOffset.y - mChatList.frame.height
+        UIView.animate(withDuration: duration, animations: { 
+            self.view.layoutIfNeeded()
+            self.lockAtBottom(offset: offset)
+        })
+    }
+    
     func clearTextBox() {
         mTextChat.text = ""
-        renderChatBox(text: "")
+        updateChatBox(text: "")
     }
     
     @objc func scrollToBottom() {
@@ -58,25 +95,5 @@ class ChatViewController: UIViewController {
                                                   size: mChatList.bounds.size), animated: true)
     }
     
-    func lockAtBottom(offsetY: CGFloat) {
-        mChatList.contentOffset.y = mChatList.contentSize.height - mChatList.frame.height - offsetY
-    }
-    
-    private func closeKeyboard() {
-        if mTextChat.isFirstResponder {
-            mTextChat.resignFirstResponder()
-        }
-    }
-    
-    // MARK: Users Actions
-    
-    @IBAction private func btnSend_Click(_ sender: Any) {
-        mPresenter.send(msg: mTextChat.text)
-        clearTextBox()
-    }
-    
-    @IBAction private func chatList_Tap(_ sender: UITapGestureRecognizer) {
-        closeKeyboard()
-    }
 }
 

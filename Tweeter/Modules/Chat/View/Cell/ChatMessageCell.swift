@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
-    @IBOutlet private weak var mTextLabel: UILabel!
+    
+    @IBOutlet weak var mTextLabel: UILabel!
     
     func setData(msg: ChatMessage) {
         mTextLabel.text = msg.msg
         self.layoutIfNeeded()
     }
-    
 }

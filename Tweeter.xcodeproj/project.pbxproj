@@ -10,6 +10,11 @@
 		952C49D82179DC9400DA9951 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49D72179DC9400DA9951 /* Splitter.swift */; };
 		952C49DB2179E10300DA9951 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49DA2179E10300DA9951 /* ChatMessage.swift */; };
 		952C49DE2179E37C00DA9951 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49DD2179E37C00DA9951 /* ChatMessageCell.swift */; };
+		952C49E0217A359700DA9951 /* IChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49DF217A359700DA9951 /* IChatController.swift */; };
+		952C49E2217A361F00DA9951 /* ChatModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49E1217A361F00DA9951 /* ChatModule.swift */; };
+		952C49E4217A3E0200DA9951 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49E3217A3E0200DA9951 /* UIViewController.swift */; };
+		952C49E6217A409100DA9951 /* IChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49E5217A409100DA9951 /* IChatPresenter.swift */; };
+		952C49E8217A582700DA9951 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49E7217A582700DA9951 /* NSObject.swift */; };
 		95A0CF6F2178F70200ABC76E /* TweeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0CF6E2178F70200ABC76E /* TweeterApp.swift */; };
 		95A0CF712178F70200ABC76E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0CF702178F70200ABC76E /* ChatViewController.swift */; };
 		95A0CF742178F70200ABC76E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A0CF722178F70200ABC76E /* Main.storyboard */; };
@@ -34,6 +39,11 @@
 		952C49D72179DC9400DA9951 /* Splitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splitter.swift; sourceTree = "<group>"; };
 		952C49DA2179E10300DA9951 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		952C49DD2179E37C00DA9951 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		952C49DF217A359700DA9951 /* IChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IChatController.swift; sourceTree = "<group>"; };
+		952C49E1217A361F00DA9951 /* ChatModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModule.swift; sourceTree = "<group>"; };
+		952C49E3217A3E0200DA9951 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		952C49E5217A409100DA9951 /* IChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IChatPresenter.swift; sourceTree = "<group>"; };
+		952C49E7217A582700DA9951 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		95A0CF6B2178F70200ABC76E /* Tweeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95A0CF6E2178F70200ABC76E /* TweeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweeterApp.swift; sourceTree = "<group>"; };
 		95A0CF702178F70200ABC76E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -160,9 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				952C49D92179E0E800DA9951 /* Model */,
-				952C49D62179DC5E00DA9951 /* Splitter */,
 				95A0CF932179BE9C00ABC76E /* Presenter */,
 				95A0CF922179BE8A00ABC76E /* View */,
+				952C49E1217A361F00DA9951 /* ChatModule.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -171,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				952C49DC2179E36300DA9951 /* Cell */,
+				952C49DF217A359700DA9951 /* IChatController.swift */,
 				95A0CF702178F70200ABC76E /* ChatViewController.swift */,
 			);
 			path = View;
@@ -179,6 +190,8 @@
 		95A0CF932179BE9C00ABC76E /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				952C49D62179DC5E00DA9951 /* Splitter */,
+				952C49E5217A409100DA9951 /* IChatPresenter.swift */,
 				95A0CF942179BEB800ABC76E /* ChatPresenter.swift */,
 			);
 			path = Presenter;
@@ -187,7 +200,9 @@
 		95A0CF962179D4E700ABC76E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				952C49E7217A582700DA9951 /* NSObject.swift */,
 				95A0CF972179D4F700ABC76E /* UIColor.swift */,
+				952C49E3217A3E0200DA9951 /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -297,9 +312,14 @@
 				95A0CF982179D4F700ABC76E /* UIColor.swift in Sources */,
 				95A0CF712178F70200ABC76E /* ChatViewController.swift in Sources */,
 				952C49DB2179E10300DA9951 /* ChatMessage.swift in Sources */,
+				952C49E6217A409100DA9951 /* IChatPresenter.swift in Sources */,
+				952C49E4217A3E0200DA9951 /* UIViewController.swift in Sources */,
+				952C49E0217A359700DA9951 /* IChatController.swift in Sources */,
 				95A0CF6F2178F70200ABC76E /* TweeterApp.swift in Sources */,
 				952C49DE2179E37C00DA9951 /* ChatMessageCell.swift in Sources */,
+				952C49E8217A582700DA9951 /* NSObject.swift in Sources */,
 				952C49D82179DC9400DA9951 /* Splitter.swift in Sources */,
+				952C49E2217A361F00DA9951 /* ChatModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
