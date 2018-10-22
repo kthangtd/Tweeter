@@ -23,6 +23,11 @@ class ChatViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.bind()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.registerNotification()
@@ -34,15 +39,20 @@ class ChatViewController: UIViewController {
     }
     
     func bind() {
-        mChatList.dataSource = presenter
-        mChatList.delegate = presenter
-        mTextChat.delegate = presenter
+        if let presenter = self.presenter,
+            let chatList = mChatList,
+            let textChat = mTextChat {
+            chatList.dataSource = presenter
+            chatList.delegate = presenter
+            textChat.delegate = presenter
+        }
     }
     
     // MARK: Users Actions
     
     @IBAction func btnSend_Click(_ sender: Any) {
-        presenter?.send(msg: mTextChat.text)
+//        presenter?.send(msg: mTextChat.text)
+        presenter?.send(msg: "I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself.")
         clearTextBox()
     }
     

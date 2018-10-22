@@ -15,9 +15,11 @@
 		952C49E4217A3E0200DA9951 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49E3217A3E0200DA9951 /* UIViewController.swift */; };
 		952C49E6217A409100DA9951 /* IChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49E5217A409100DA9951 /* IChatPresenter.swift */; };
 		952C49E8217A582700DA9951 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49E7217A582700DA9951 /* NSObject.swift */; };
+		952C49EA217C21D200DA9951 /* ChatViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952C49E9217C21D200DA9951 /* ChatViewController.storyboard */; };
+		952C49EC217C224D00DA9951 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952C49EB217C224D00DA9951 /* MainViewController.swift */; };
 		95A0CF6F2178F70200ABC76E /* TweeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0CF6E2178F70200ABC76E /* TweeterApp.swift */; };
 		95A0CF712178F70200ABC76E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0CF702178F70200ABC76E /* ChatViewController.swift */; };
-		95A0CF742178F70200ABC76E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A0CF722178F70200ABC76E /* Main.storyboard */; };
+		95A0CF742178F70200ABC76E /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A0CF722178F70200ABC76E /* MainViewController.storyboard */; };
 		95A0CF762178F70500ABC76E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95A0CF752178F70500ABC76E /* Assets.xcassets */; };
 		95A0CF792178F70500ABC76E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A0CF772178F70500ABC76E /* LaunchScreen.storyboard */; };
 		95A0CF842178F70500ABC76E /* TweeterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0CF832178F70500ABC76E /* TweeterTests.swift */; };
@@ -44,10 +46,12 @@
 		952C49E3217A3E0200DA9951 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		952C49E5217A409100DA9951 /* IChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IChatPresenter.swift; sourceTree = "<group>"; };
 		952C49E7217A582700DA9951 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		952C49E9217C21D200DA9951 /* ChatViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatViewController.storyboard; sourceTree = "<group>"; };
+		952C49EB217C224D00DA9951 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		95A0CF6B2178F70200ABC76E /* Tweeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95A0CF6E2178F70200ABC76E /* TweeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweeterApp.swift; sourceTree = "<group>"; };
 		95A0CF702178F70200ABC76E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		95A0CF732178F70200ABC76E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		95A0CF732178F70200ABC76E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainViewController.storyboard; sourceTree = "<group>"; };
 		95A0CF752178F70500ABC76E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95A0CF782178F70500ABC76E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95A0CF7A2178F70500ABC76E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +102,23 @@
 				952C49DD2179E37C00DA9951 /* ChatMessageCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		952C49ED217C252B00DA9951 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				952C49EE217C253A00DA9951 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		952C49EE217C253A00DA9951 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				95A0CF722178F70200ABC76E /* MainViewController.storyboard */,
+				952C49EB217C224D00DA9951 /* MainViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		95A0CF622178F70200ABC76E = {
@@ -160,7 +181,7 @@
 		95A0CF902178F75E00ABC76E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				95A0CF722178F70200ABC76E /* Main.storyboard */,
+				952C49ED217C252B00DA9951 /* Main */,
 				95A0CF912179BE8000ABC76E /* Chat */,
 			);
 			path = Modules;
@@ -183,6 +204,7 @@
 				952C49DC2179E36300DA9951 /* Cell */,
 				952C49DF217A359700DA9951 /* IChatController.swift */,
 				95A0CF702178F70200ABC76E /* ChatViewController.swift */,
+				952C49E9217C21D200DA9951 /* ChatViewController.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -290,7 +312,8 @@
 			files = (
 				95A0CF792178F70500ABC76E /* LaunchScreen.storyboard in Resources */,
 				95A0CF762178F70500ABC76E /* Assets.xcassets in Resources */,
-				95A0CF742178F70200ABC76E /* Main.storyboard in Resources */,
+				95A0CF742178F70200ABC76E /* MainViewController.storyboard in Resources */,
+				952C49EA217C21D200DA9951 /* ChatViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95A0CF952179BEB800ABC76E /* ChatPresenter.swift in Sources */,
+				952C49EC217C224D00DA9951 /* MainViewController.swift in Sources */,
 				95A0CF982179D4F700ABC76E /* UIColor.swift in Sources */,
 				95A0CF712178F70200ABC76E /* ChatViewController.swift in Sources */,
 				952C49DB2179E10300DA9951 /* ChatMessage.swift in Sources */,
@@ -342,12 +366,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		95A0CF722178F70200ABC76E /* Main.storyboard */ = {
+		95A0CF722178F70200ABC76E /* MainViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				95A0CF732178F70200ABC76E /* Base */,
 			);
-			name = Main.storyboard;
+			name = MainViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		95A0CF772178F70500ABC76E /* LaunchScreen.storyboard */ = {
