@@ -20,5 +20,5 @@ protocol IChatController: NSObjectProtocol {
     func animationChatBox(duration: TimeInterval)
     func clearTextBox()
     func scrollToBottom()
-    
+    func showAlert(msg: String)
 }

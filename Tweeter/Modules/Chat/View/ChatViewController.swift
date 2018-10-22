@@ -51,8 +51,7 @@ class ChatViewController: UIViewController {
     // MARK: Users Actions
     
     @IBAction func btnSend_Click(_ sender: Any) {
-//        presenter?.send(msg: mTextChat.text)
-        presenter?.send(msg: "I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself. I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself.")
+        presenter?.send(msg: mTextChat.text)
         clearTextBox()
     }
     
@@ -103,6 +102,15 @@ extension ChatViewController: IChatController {
     @objc func scrollToBottom() {
         mChatList.scrollRectToVisible(CGRect.init(origin: CGPoint.init(x: 0, y: mChatList.contentSize.height-mChatList.bounds.height), 
                                                   size: mChatList.bounds.size), animated: true)
+    }
+    
+    func showAlert(msg: String) {
+        let alertController = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

@@ -81,9 +81,16 @@ extension ChatPresenter {
     func send(msg: String) {
         mSplitQueue.async {
             guard let result = self.mSplitter.splitMessage(msg: msg) else {
-                fatalError("error")
+                self.showAlert(msg: "Split Error")
+                return
             }
             self.performMessageQueue(listMsg: result)
+        }
+    }
+    
+    func showAlert(msg: String) {
+        DispatchQueue.main.async {
+            self.mRoot?.showAlert(msg: msg)
         }
     }
     
@@ -121,6 +128,8 @@ extension ChatPresenter  {
         }
         root.updateChatBox(text: textView.text)
     }
+    
+    
 }
 
 // MARK: UICollectionViewDataSource
