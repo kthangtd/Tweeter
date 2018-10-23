@@ -14,7 +14,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var mTextChat: UITextView!
     @IBOutlet weak var mChatBoxBottom: NSLayoutConstraint!
     @IBOutlet weak var mBtnSend: UIButton!
-    @IBOutlet weak var mChatList: UICollectionView!
+    @IBOutlet weak var mListView: UICollectionView!
     
     var presenter: IChatPresenter? {
         didSet {
@@ -39,10 +39,10 @@ class ChatViewController: UIViewController {
     
     func bind() {
         if let presenter = self.presenter,
-            let chatList = mChatList,
+            let listView = mListView,
             let textChat = mTextChat {
-            chatList.dataSource = presenter
-            chatList.delegate = presenter
+            listView.dataSource = presenter
+            listView.delegate = presenter
             textChat.delegate = presenter
         }
     }
@@ -65,7 +65,7 @@ extension ChatViewController: IChatController {
     
     func notifyDataChanged() {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
-        mChatList.reloadData()
+        mListView.reloadData()
         perform(#selector(scrollToBottom), with: nil, afterDelay: 0.2)
     }
     
@@ -81,11 +81,11 @@ extension ChatViewController: IChatController {
     }
     
     func lockAtBottom(offset y: CGFloat) {
-        mChatList.contentOffset.y = mChatList.contentSize.height - mChatList.frame.height - y
+        mListView.contentOffset.y = max(mListView.contentSize.height - mListView.frame.height - y, 0)
     }
     
     func animationChatBox(duration: TimeInterval) {
-        let offset = mChatList.contentSize.height - mChatList.contentOffset.y - mChatList.frame.height
+        let offset = mListView.contentSize.height - mListView.contentOffset.y - mListView.frame.height
         UIView.animate(withDuration: duration, animations: { 
             self.view.layoutIfNeeded()
             self.lockAtBottom(offset: offset)
@@ -98,9 +98,9 @@ extension ChatViewController: IChatController {
     }
     
     @objc func scrollToBottom() {
-        let y = mChatList.contentSize.height - mChatList.bounds.height
-        mChatList.scrollRectToVisible(CGRect.init(origin: CGPoint(x: 0, y: y), 
-                                                  size: mChatList.bounds.size), animated: true)
+        let y = mListView.contentSize.height - mListView.bounds.height
+        mListView.scrollRectToVisible(CGRect.init(origin: CGPoint(x: 0, y: y), 
+                                                  size: mListView.bounds.size), animated: true)
     }
     
     func showAlert(msg: String) {

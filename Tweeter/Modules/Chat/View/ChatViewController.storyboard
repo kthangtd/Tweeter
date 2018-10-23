@@ -40,10 +40,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihW-VT-EDX">
-                                                    <rect key="frame" x="71.5" y="0.0" width="59.5" height="50"/>
+                                                    <rect key="frame" x="83.5" y="0.0" width="47.5" height="50"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8M-nc-Kc5">
-                                                            <rect key="frame" x="10" y="5" width="39.5" height="40"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8M-nc-Kc5">
+                                                            <rect key="frame" x="10" y="5" width="27.5" height="40"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -53,6 +53,7 @@
                                                     <constraints>
                                                         <constraint firstItem="x8M-nc-Kc5" firstAttribute="top" secondItem="ihW-VT-EDX" secondAttribute="top" constant="5" id="3bU-Kw-RdA"/>
                                                         <constraint firstItem="x8M-nc-Kc5" firstAttribute="leading" secondItem="ihW-VT-EDX" secondAttribute="leading" constant="10" id="Yoo-AY-Gqz"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="bCU-a9-h8c"/>
                                                         <constraint firstAttribute="trailing" secondItem="x8M-nc-Kc5" secondAttribute="trailing" constant="10" id="qaV-LZ-qjZ"/>
                                                         <constraint firstAttribute="bottom" secondItem="x8M-nc-Kc5" secondAttribute="bottom" constant="5" id="rT6-gL-gqB"/>
                                                     </constraints>
@@ -194,7 +195,7 @@
                     <connections>
                         <outlet property="mBtnSend" destination="6jo-2G-KkD" id="m5D-Ls-ARI"/>
                         <outlet property="mChatBoxBottom" destination="eA4-I5-Q2f" id="97j-q0-Koy"/>
-                        <outlet property="mChatList" destination="djV-Zh-mtR" id="I96-hw-tSm"/>
+                        <outlet property="mListView" destination="djV-Zh-mtR" id="YMO-xU-RKP"/>
                         <outlet property="mTextChat" destination="qE0-k0-3sE" id="n4V-ea-7Fv"/>
                         <outlet property="mTextPlaceHolder" destination="av2-va-tCD" id="xea-Mq-5Id"/>
                     </connections>

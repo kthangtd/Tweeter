@@ -16,11 +16,14 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mChatModule = ChatModule()
-        
-        perform(#selector(openChat), with: nil, afterDelay: 1)
     }
     
-    @objc func openChat() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        openChat()
+    }
+    
+    private func openChat() {
         self.present(mChatModule.view, animated: false, completion: nil)
     }
     
