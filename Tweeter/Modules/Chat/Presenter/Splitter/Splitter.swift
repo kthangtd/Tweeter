@@ -21,32 +21,28 @@ class Splitter {
         var rs: [String] = []
         var words: [Substring] = msg.split(separator: " ", omittingEmptySubsequences: false)
         let count = getCount(msg)
+        var subMsg: String!
         
-        var subMsg = ""
         for i in 1...(count + 1)  {
             guard words.count > 0 else {
                 break
             }
-            
             subMsg = "\(i)/\(count)"
+            let maxCharable = MAX_CHAR_IN_MSG - (subMsg.count + 1)
             var isBreak = false
             while !isBreak && words.count > 0 {
                 var word = words[0]
-                
-                guard word.count < MAX_CHAR_IN_MSG else {
+                guard word.count <= maxCharable else {
                     return nil
                 }
-                
                 if word == "" {
                     word = " "
                 }
-                
                 if subMsg.count + word.count + 1 <= MAX_CHAR_IN_MSG {
                     subMsg += " " + word
                     words.removeFirst()
                 } else {
                     rs.append(subMsg)
-                    subMsg = ""
                     isBreak = true
                 }
             }

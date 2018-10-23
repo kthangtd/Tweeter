@@ -89,8 +89,11 @@ extension ChatPresenter {
     }
     
     func showAlert(msg: String) {
+        guard let root = mRoot else {
+            return
+        }
         DispatchQueue.main.async {
-            self.mRoot?.showAlert(msg: msg)
+            root.showAlert(msg: msg)
         }
     }
     

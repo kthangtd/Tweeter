@@ -10,7 +10,6 @@ import UIKit
 
 class ChatViewController: UIViewController {
 
-    @IBOutlet weak var mTextBounds: UILabel!
     @IBOutlet weak var mTextPlaceHolder: UILabel!
     @IBOutlet weak var mTextChat: UITextView!
     @IBOutlet weak var mChatBoxBottom: NSLayoutConstraint!
@@ -71,7 +70,6 @@ extension ChatViewController: IChatController {
     }
     
     func updateChatBox(text str: String) {
-        mTextBounds.text = str
         let available = str.count > 0
         mBtnSend.isEnabled = available
         mTextPlaceHolder.isHidden = available
@@ -100,7 +98,8 @@ extension ChatViewController: IChatController {
     }
     
     @objc func scrollToBottom() {
-        mChatList.scrollRectToVisible(CGRect.init(origin: CGPoint.init(x: 0, y: mChatList.contentSize.height-mChatList.bounds.height), 
+        let y = mChatList.contentSize.height - mChatList.bounds.height
+        mChatList.scrollRectToVisible(CGRect.init(origin: CGPoint(x: 0, y: y), 
                                                   size: mChatList.bounds.size), animated: true)
     }
     
