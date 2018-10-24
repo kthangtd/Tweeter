@@ -88,7 +88,7 @@ extension ChatViewController: IChatController {
         let offset = mListView.contentSize.height - mListView.contentOffset.y - mListView.frame.height
         UIView.animate(withDuration: duration, animations: { 
             self.view.layoutIfNeeded()
-            self.lockAtBottom(offset: offset)
+            self.lockAtBottom(offset: max(offset, 0))
         })
     }
     

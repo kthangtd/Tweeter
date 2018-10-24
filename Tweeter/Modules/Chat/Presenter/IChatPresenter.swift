@@ -11,10 +11,11 @@ import UIKit
 
 protocol IChatPresenter: UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    init(root: IChatController)
+    var model: IChatModel? { set get }
+    
+    init(view: IChatController)
     
     func registerNotification()
     func unregisterNotification()  
-    
     func send(msg: String)
 }

@@ -12,10 +12,14 @@ class ChatModule {
     
     var view: ChatViewController!
     var presenter: IChatPresenter! 
+    var model: IChatModel!
     
     init() {
         view = ChatViewController.create() as? ChatViewController
-        presenter = ChatPresenter(root: view)
+        presenter = ChatPresenter(view: view)
+        model = ChatModel()
+        
+        presenter.model = model
         view.presenter = presenter
     }
     

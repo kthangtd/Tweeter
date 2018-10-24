@@ -11,19 +11,20 @@ import UIKit
 
 class ChatPresenter: NSObject {
 
-    weak var mRoot: IChatController?
+    weak var mView: IChatController?
     let mSplitter: Splitter = Splitter()
-    var mMessages: [ChatMessage] = []
+    var model: IChatModel?
     
     let mMessageQueue: DispatchQueue = DispatchQueue.init(label: "vn.com.kthangtd.ios.Tweeter.messageQueue")
     let mSplitQueue: DispatchQueue = DispatchQueue.init(label: "vn.com.kthangtd.ios.Tweeter.splitQueue")
     
-    required init(root: IChatController) {
+    required init(view: IChatController) {
         super.init()
-        mRoot = root
+        mView = view
     }
-    
+
     deinit {
+        model = nil
     }
 }
 
@@ -51,21 +52,21 @@ extension ChatPresenter {
         guard let info = notification.userInfo,
             let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
             let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
-            let root = mRoot else {
+            let view = mView else {
             return
         }
-        root.updateChatBox(bottom: keyboardSize.height)
-        root.animationChatBox(duration: duration)
+        view.updateChatBox(bottom: keyboardSize.height)
+        view.animationChatBox(duration: duration)
     }
     
     @objc func keyboardWillHide(notification: Notification) {
         guard let info = notification.userInfo,
             let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
-            let root = mRoot else {
+            let view = mView else {
                 return
         }
-        root.updateChatBox(bottom: 0)
-        root.animationChatBox(duration: duration)
+        view.updateChatBox(bottom: 0)
+        view.animationChatBox(duration: duration)
     }
     
     @objc func appDidEnterBackground() {
@@ -81,7 +82,7 @@ extension ChatPresenter {
     func send(msg: String) {
         mSplitQueue.async {
             guard let result = self.mSplitter.splitMessage(msg: msg) else {
-                self.showAlert(msg: "Split Error")
+                self.showAlert(msg: "Split Error: has a word more than 50 chars.")
                 return
             }
             self.performMessageQueue(listMsg: result)
@@ -89,11 +90,11 @@ extension ChatPresenter {
     }
     
     func showAlert(msg: String) {
-        guard let root = mRoot else {
+        guard let view = mView else {
             return
         }
         DispatchQueue.main.async {
-            root.showAlert(msg: msg)
+            view.showAlert(msg: msg)
         }
     }
     
@@ -108,16 +109,16 @@ extension ChatPresenter {
     
     func processMessage(msg: String) {
         let chatMsg = ChatMessage(msg: msg)
-        mMessages.append(chatMsg)
+        model?.addItem(msg: chatMsg)
         // TODO: send msg to network
     }
     
     func performNotifyDataChanged() {
-        guard let root = mRoot else {
+        guard let view = mView else {
             return
         }
         DispatchQueue.main.async {
-            root.notifyDataChanged()
+            view.notifyDataChanged()
         }
     }
 }
@@ -126,26 +127,24 @@ extension ChatPresenter {
 extension ChatPresenter  {
     
     func textViewDidChange(_ textView: UITextView) {
-        guard let root = mRoot else {
+        guard let view = mView else {
             return
         }
-        root.updateChatBox(text: textView.text)
+        view.updateChatBox(text: textView.text)
     }
-    
-    
 }
 
 // MARK: UICollectionViewDataSource
 extension ChatPresenter {
     
     func collectionView(_ collectionView: UICollectionView,  numberOfItemsInSection section: Int) -> Int {
-        return mMessages.count
+        return model?.getCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView,  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.name(), for: indexPath) as! ChatMessageCell
-        let msg = mMessages[indexPath.item]
-        cell.setData(msg: msg)
+        let msg = model?.getItem(at: indexPath.item)
+        cell.setData(msg: msg!)
         return cell
     }
 }
@@ -156,7 +155,7 @@ extension ChatPresenter {
     func collectionView(_ collectionView: UICollectionView, 
                         layout collectionViewLayout: UICollectionViewLayout, 
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let msg = mMessages[indexPath.item]
-        return msg.calculate(width: collectionView.frame.width)
+        let msg = model?.getItem(at: indexPath.item)
+        return msg!.calculate(width: collectionView.frame.width)
     }
 }
